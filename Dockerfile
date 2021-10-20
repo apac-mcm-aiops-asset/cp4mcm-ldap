@@ -9,4 +9,4 @@ COPY scripts scripts
 COPY main.sh main.sh
 RUN chmod +x main.sh 
 
-CMD ["./ldap.sh"]
+CMD ["./main.sh"]
