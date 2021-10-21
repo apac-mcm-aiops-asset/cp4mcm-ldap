@@ -14,7 +14,7 @@ log YOUR_CP4MCM_ROUTE = $YOUR_CP4MCM_ROUTE
 log YOUR_IM_HTTPD_ROUTE = $YOUR_IM_HTTPD_ROUTE
 log CP_PASSWORD = $CP_PASSWORD
 
-execlog cloudctl login -a $YOUR_CP4MCM_ROUTE --skip-ssl-validation -u admin -p $CP_PASSWORD -n ibm-common-services
+execlog ./cloudctl login -a $YOUR_CP4MCM_ROUTE --skip-ssl-validation -u admin -p $CP_PASSWORD -n ibm-common-services
 
 #
 # Register IAM OAUTH client
@@ -53,7 +53,7 @@ cat << EOF > registration.json
 }
 EOF
 
-execlog cloudctl iam oauth-client-register -f registration.json
+execlog ./cloudctl iam oauth-client-register -f registration.json
 
 #
 # Create imconnectionsecret
