@@ -11,7 +11,7 @@ CLOUDCTL_TRACE=true
 #
 YOUR_CP4MCM_ROUTE=`oc -n ibm-common-services get route cp-console --template '{{.spec.host}}'`
 CP_PASSWORD=`oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 -d`
-execlog cloudctl login -a $YOUR_CP4MCM_ROUTE --skip-ssl-validation -u admin -p $CP_PASSWORD -n default
+execlog ./cloudctl login -a $YOUR_CP4MCM_ROUTE --skip-ssl-validation -u admin -p $CP_PASSWORD -n default
 
 #
 # Create LDAP Resources
@@ -74,11 +74,11 @@ progress-bar 60
 # Configure CP4MCM LDAP 
 #
 log "Configuring LDAP connection for Common Services."
-execlog cloudctl iam ldap-create my_ldap --basedn 'dc=ibm,dc=com' --binddn 'cn=admin,dc=ibm,dc=com' --binddn-password Passw0rd --server ldap://ldap-service.ldap.svc.cluster.local:389 --group-filter '(&(cn=%v)(objectclass=groupOfUniqueNames))' --group-id-map '*:cn' --group-member-id-map 'groupOfUniqueNames:uniqueMember' --user-filter '(&(uid=%v)(objectclass=inetOrgPerson))' --user-id-map '*:uid'
-execlog cloudctl iam team-create operations
-execlog cloudctl iam group-import --group operations -f
-execlog cloudctl iam team-add-groups operations Administrator -g operations
-execlog cloudctl iam resource-add operations -r "crn:v1:icp:private:k8:mycluster:n/default:::"
+execlog ./cloudctl iam ldap-create my_ldap --basedn 'dc=ibm,dc=com' --binddn 'cn=admin,dc=ibm,dc=com' --binddn-password Passw0rd --server ldap://ldap-service.ldap.svc.cluster.local:389 --group-filter '(&(cn=%v)(objectclass=groupOfUniqueNames))' --group-id-map '*:cn' --group-member-id-map 'groupOfUniqueNames:uniqueMember' --user-filter '(&(uid=%v)(objectclass=inetOrgPerson))' --user-id-map '*:uid'
+execlog ./cloudctl iam team-create operations
+execlog ./cloudctl iam group-import --group operations -f
+execlog ./cloudctl iam team-add-groups operations Administrator -g operations
+execlog ./cloudctl iam resource-add operations -r "crn:v1:icp:private:k8:mycluster:n/default:::"
 
 #
 # List out what users in "operations" group that we've imported
