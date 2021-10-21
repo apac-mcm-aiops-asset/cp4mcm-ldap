@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source lib/functions.sh
+source scripts/lib/functions.sh
 
 YOUR_CLIENT_ID=`echo There is a huge white elephant in LA zoo | base64`
 YOUR_CLIENT_SECRET=`echo 12345678901234567890123456789012345 | base64`

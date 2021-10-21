@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source lib/functions.sh
+source scripts/lib/functions.sh
 
 #
 #

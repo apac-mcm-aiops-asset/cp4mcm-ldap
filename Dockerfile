@@ -7,6 +7,6 @@ RUN tar -xzf cloudctl.tar.gz
 RUN mv cloudctl-linux-amd64 cloudctl
 COPY scripts scripts
 COPY main.sh main.sh
-RUN chmod +x main.sh 
+RUN chmod +x main.sh && chmod +x ./scripts/CloudFormsandOIDC.sh && chmod +x ./scripts/ldap.sh && chmod +x ./scripts/mcm-postinstall.sh && chmod +x ./scripts/patch-im.sh && chmod +x ./scripts/lib/functions.sh
 
 CMD ["./main.sh"]
