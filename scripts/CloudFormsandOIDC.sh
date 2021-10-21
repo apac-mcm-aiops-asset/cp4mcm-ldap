@@ -196,7 +196,7 @@ status
 # Create links in the UI
 #
 log "Applying navigation UI updates."
-./cp4m/automation-navigation-updates.sh -p
+./scripts/automation-navigation-updates.sh -p
 
 #
 # Clean Up
