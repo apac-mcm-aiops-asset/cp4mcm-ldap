@@ -4,3 +4,5 @@
 ./scripts/ldap.sh
 ./scripts/CloudFormsandOIDC.sh
 ./scripts/patch-im.sh
+
+exit 0
