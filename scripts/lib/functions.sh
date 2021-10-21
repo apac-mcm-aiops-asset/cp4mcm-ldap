@@ -52,12 +52,12 @@ function status {
     COUNT=0;
     for ((time=1;time<60;time++)); do
         # Added gateway-kong to the exclusion due to bug on ROKS.
-        # Added ibm-monitoring-kube-state exclusion
+        # Added ibm-monitoring-kube-state
         WC=`oc get po --no-headers=true -A | grep -v 'Running\|Completed\|gateway-kong\|selenium\|sre-bastion\|ibm-monitoring-kube-state' | grep 'kube-system\|ibm-common-services\|management-infrastructure-management\|management-monitoring\|management-operations\|management-security-services' | wc -l`
         echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         echo "Waiting for pods to start.. retry ($time of 60)(Pods remaining = $WC)(Consecutive tries $COUNT/3)"
         echo ""
-        oc get po -A | grep -v 'Running\|Completed' | grep 'kube-system\|ibm-common-services\|management-infrastructure-management\|management-monitoring\|management-operations\|management-security-services'
+        oc get po --no-headers=true -A | grep -v 'Running\|Completed\|gateway-kong\|selenium\|sre-bastion\|ibm-monitoring-kube-state' | grep 'kube-system\|ibm-common-services\|management-infrastructure-management\|management-monitoring\|management-operations\|management-security-services'
         
         if [ $WC -le 0 ]; then
             ((COUNT++))
