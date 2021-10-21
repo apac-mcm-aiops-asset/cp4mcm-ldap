@@ -13,7 +13,6 @@ log YOUR_CLIENT_SECRET = $YOUR_CLIENT_SECRET
 log YOUR_CP4MCM_ROUTE = $YOUR_CP4MCM_ROUTE
 log YOUR_IM_HTTPD_ROUTE = $YOUR_IM_HTTPD_ROUTE
 log CP_PASSWORD = $CP_PASSWORD
-log ENTITLED_REGISTRY_SECRET = $ENTITLED_REGISTRY_SECRET
 
 execlog cloudctl login -a $YOUR_CP4MCM_ROUTE --skip-ssl-validation -u admin -p $CP_PASSWORD -n ibm-common-services
 
@@ -152,7 +151,7 @@ metadata:
   namespace: management-infrastructure-management
 spec:
   applicationDomain: $YOUR_IM_HTTPD_ROUTE
-  imagePullSecret: $ENTITLED_REGISTRY_SECRET
+  imagePullSecret: ibm-management-pull-secret
   httpdAuthenticationType: openid-connect
   httpdAuthConfig: imconnectionsecret
   enableSSO: true
