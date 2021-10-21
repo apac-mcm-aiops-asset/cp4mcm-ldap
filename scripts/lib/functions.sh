@@ -107,7 +107,7 @@ function progress-bar {
 
   space_reserved=6   # reserved width for the percentage value
   duration=${1}
-  columns=80
+  columns=$(tput cols)
   space_available=$(( columns-space_reserved ))
 
   if (( duration < space_available )); then 
