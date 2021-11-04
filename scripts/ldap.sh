@@ -44,7 +44,7 @@ spec:
     spec:
       containers:
         - name: ldap
-          image: johnowebb/openldap:latest
+          image: quay.io/congxdev/ldap:latest
           ports:
             - containerPort: 389
               name: openldap
