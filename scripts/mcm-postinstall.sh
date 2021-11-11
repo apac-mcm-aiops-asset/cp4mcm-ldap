@@ -3,4 +3,6 @@
 source scripts/lib/functions.sh
 
 log "Checking the installation progress till completion...be patient!"
-status
+#status
+coolOff
+verifyCAMstatus
