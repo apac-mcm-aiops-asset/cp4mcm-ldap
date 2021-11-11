@@ -8,6 +8,6 @@ RUN mv cloudctl-linux-amd64 cloudctl
 COPY scripts scripts
 COPY main.sh main.sh
 RUN export PATH="~:$PATH"
-RUN chmod +x main.sh && chmod +x ./scripts/CloudFormsandOIDC.sh && chmod +x ./scripts/ldap.sh && chmod +x ./scripts/mcm-postinstall.sh && chmod +x ./scripts/patch-im.sh && chmod +x ./scripts/lib/functions.sh
+RUN chmod +x main.sh && chmod +x ./scripts/CloudFormsandOIDC.sh && chmod +x ./scripts/ldap.sh && chmod +x ./scripts/mcm-postinstall.sh && chmod +x ./scripts/patch-im.sh && chmod +x ./scripts/lib/functions.sh && chmod +x ./scripts/trim-ui.sh && chmod +x ./scripts/manipulateFoundation.sh
 
 CMD ["./main.sh"]
