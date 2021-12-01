@@ -72,6 +72,67 @@ function status {
     done
 }
 
+function coolOff() {
+    echo "**********************************************************************"
+    echo "Initializing Services; Check back in 10 minutes"
+    echo "**********************************************************************"
+    echo ""
+    # Waiting for Common Services to cool off before creating the OperandRequest
+    sleep 600s
+    return 0
+}
+
+function verifyCAMstatus {
+    echo "**********************************************************************"
+    echo "Checking CAM"
+    echo "**********************************************************************"
+
+    # check mongodb
+    local counter=0
+    while [[ true ]]; do
+	oc rollout status deployment cam-mongo -n management-infrastructure-management > /dev/null 2>&1
+	local result=$?
+	if [[ "${result}" -eq 0 ]]; then
+	    break
+	elif [[ "${counter}" -ge 120 ]]; then
+	    echo "ERROR: The cam-mongo deployment has not completed its rollout."
+	    echo ""
+	    exit 1
+	fi
+	echo -n " ... "
+	counter=$((counter + 1))
+	sleep 60s
+    done
+
+    echo ""
+    echo "The cam-mongo deployment has successfully rolled out"
+    echo ""
+
+    # check cam-bpd-cds
+
+    counter=0
+    while [[ true ]]; do
+	oc rollout status deployment cam-bpd-cds -n management-infrastructure-management > /dev/null 2>&1
+	result=$?
+	if [[ "${result}" -eq 0 ]]; then
+	    break
+	elif [[ "${counter}" -ge 45 ]]; then
+	    echo "ERROR: The cam-bpd-cds deployment has not completed its rollout."
+	    echo ""
+	    exit 1
+	fi
+	echo -n " ... "
+	counter=$((counter + 1))
+	sleep 60s
+    done
+
+    echo ""
+    echo "The cam-bpd-cds deployment has successfully rolled out"
+    echo ""
+
+    return 0
+}
+
 function cscred {
     # Get the CP Route
     YOUR_CP4MCM_ROUTE=`oc -n ibm-common-services get route cp-console --template '{{.spec.host}}'`

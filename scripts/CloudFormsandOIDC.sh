@@ -138,7 +138,7 @@ EOF
 #
 # Create IMInstall
 #
-log "Creating CloudForms IMInstall"
+log "Deploy ibm-management-im-install operand IMInstall"
 oc apply -f - <<EOF
 apiVersion: infra.management.ibm.com/v1alpha1
 kind: IMInstall
@@ -151,6 +151,7 @@ metadata:
   namespace: management-infrastructure-management
 spec:
   applicationDomain: $YOUR_IM_HTTPD_ROUTE
+  imagePullPolicy: Always
   imagePullSecret: ibm-management-pull-secret
   httpdAuthenticationType: openid-connect
   httpdAuthConfig: imconnectionsecret
@@ -195,8 +196,8 @@ status
 #
 # Create links in the UI
 #
-log "Applying navigation UI updates."
-./scripts/automation-navigation-updates.sh -p
+#log "Applying navigation UI updates."
+#./scripts/automation-navigation-updates.sh -p
 
 #
 # Clean Up
